@@ -46,8 +46,9 @@ var Player = function() {
     this.sprite = 'images/char-horn-girl.png';
 
     //initial location
-    this.x = 200;// +/- 100;
-    this.y = 380; //- 80;
+   // this.x = 200;// +/- 100;
+    //this.y = 380; //- 80;
+    this.reset();
 }
 
 Player.prototype.update = function(dt) {
@@ -63,20 +64,41 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(allowedKeys){
     if (allowedKeys === 'left'){
-        this.x = this.x - 101;
+        if (this.x < 50){
+            this.x=this.x;
+        } else {
+            this.x = this.x - 101;
+        }
     }
     if (allowedKeys === 'right'){
+        if (this.x > 400){
+            this.x=this.x;
+        } else {
         this.x = this.x + 101;
+        }
     }
     if (allowedKeys === 'up'){
+        if (this.y < 80){
+            this.reset();
+        } else {
         this.y = this.y - 83;
+        }
     }
     if (allowedKeys === 'down'){
-        this.y = this.y + 83;
+        if (this.y > 300){
+            this.y =this.y;
+        } else {
+            this.y = this.y + 83;
+        }
     }
 
 }
 
+Player.prototype.reset = function(){
+     //initial location
+    this.x = 200;
+    this.y = 380; 
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
