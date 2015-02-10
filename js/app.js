@@ -6,6 +6,19 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    //bug origin - upper left stone square (0, 60)
+    //randomize position max 500 -> x coord
+    //randomize lane 0, 1, 2 -> y-coord
+
+    var lane = Math.floor(Math.random() * 2);
+    var position = Math.floor(Math.random() * 500);
+    this.x = 0 + position; //incremental crawling to the right
+    this.y = 60 + lane * 80; // one of the three lanes 0, 1, 2
+
+    console.log("randomize enemy location");
+    console.log("x =", this.x);
+    console.log("y =", this.y);
 }
 
 // Update the enemy's position, required method for game
@@ -31,6 +44,10 @@ var Player = function() {
     // The image/sprite for our player, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-horn-girl.png';
+
+    //initial location
+    this.x = 200;// + 100;
+    this.y = 380; //- 80;
 }
 
 Player.prototype.update = function(dt) {
