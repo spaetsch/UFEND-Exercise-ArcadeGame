@@ -46,7 +46,7 @@ var Player = function() {
     this.sprite = 'images/char-horn-girl.png';
 
     //initial location
-    this.x = 200;// + 100;
+    this.x = 200;// +/- 100;
     this.y = 380; //- 80;
 }
 
@@ -61,9 +61,20 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function(){
+Player.prototype.handleInput = function(allowedKeys){
+    if (allowedKeys === 'left'){
+        this.x = this.x - 101;
+    }
+    if (allowedKeys === 'right'){
+        this.x = this.x + 101;
+    }
+    if (allowedKeys === 'up'){
+        this.y = this.y - 83;
+    }
+    if (allowedKeys === 'down'){
+        this.y = this.y + 83;
+    }
 
-    //??
 }
 
 
