@@ -35,12 +35,12 @@ Enemy.prototype.render = function() {
 
 Enemy.prototype.reset = function(){
 
-    //bug origin - upper left stone square (0, 60)
+    var column = Math.floor(Math.random() * 4); //0-4, any column
+    this.x = (column*171); 
 
-    var lane = Math.floor(Math.random() * 2);
-    var position = Math.floor(Math.random() * 500);
-    this.x = 0 + position; //incremental crawling to the right
-    this.y = 60 + lane * 80; // one of the three lanes 0, 1, 2
+    var row = Math.floor(Math.random() * 2); //0-2, three rows, offset by 1
+    this.y = (83-25) + (row*83); 
+
     this.speed = 10 + Math.random()*200;
 
 
@@ -62,11 +62,28 @@ var Player = function() {
 }
 
 Player.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+   //collision detection
+   for (beetle in allEnemies){
+     if(collisionDetect(this, allEnemies[beetle])){
+        console.log("player x ", this.x);
+        console.log("player y ", this.y);
+        console.log("enemy x", allEnemies[beetle].x);
+        console.log("enemy y", allEnemies[beetle].y);
 
+        this.reset();
+
+     }
+    }
 }
+
+var collisionDetect = function(player, enemy){
+    return !(enemy.x > player.x + 170 ||
+            enemy.x +170 < player.x ||
+            enemy.y > player.y+80 ||
+            enemy.y+80 <player.y
+        );
+}
+
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
@@ -101,13 +118,13 @@ Player.prototype.handleInput = function(allowedKeys){
             this.y = this.y + 83;
         } 
     }
-
 }
 
 Player.prototype.reset = function(){
     //initial Player location
-    this.x = 200;
-    this.y = 380; 
+    this.x = 2 * 101;         //column 3
+    this.y = (5 * 83) - 25 ;  //row 6
+    this.speed = 1;
 }
 
 // Now instantiate your objects.
@@ -116,7 +133,7 @@ var enemy1 = new Enemy;
 var enemy2 = new Enemy;
 var enemy3 = new Enemy;
 
-var allEnemies=[enemy1, enemy2, enemy3];
+var allEnemies=[enemy1];
 
 // Place the player object in a variable called player
 var player = new Player;
