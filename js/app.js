@@ -34,7 +34,6 @@ Enemy.prototype.render = function() {
 }
 
 Enemy.prototype.reset = function(){
-
     var column = Math.floor(Math.random() * 4); //0-4, any column
     this.x = (column*171); 
 
@@ -42,8 +41,6 @@ Enemy.prototype.reset = function(){
     this.y = (83-25) + (row*83); 
 
     this.speed = 10 + Math.random()*200;
-
-
 }
 
 // Now write your own player class
@@ -77,13 +74,12 @@ Player.prototype.update = function(dt) {
 }
 
 var collisionDetect = function(player, enemy){
-    return !(enemy.x > player.x + 170 ||
-            enemy.x +170 < player.x ||
+    return !( enemy.x +50> player.x + 75 ||
+            enemy.x +100 < player.x +50 ||
             enemy.y > player.y+80 ||
             enemy.y+80 <player.y
         );
 }
-
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
@@ -114,7 +110,7 @@ Player.prototype.handleInput = function(allowedKeys){
     }
     if (allowedKeys === 'down'){
         //if not in the bottom row, move down one row
-        if (this.y < 300){
+        if (this.y < 350){
             this.y = this.y + 83;
         } 
     }
@@ -133,7 +129,7 @@ var enemy1 = new Enemy;
 var enemy2 = new Enemy;
 var enemy3 = new Enemy;
 
-var allEnemies=[enemy1];
+var allEnemies=[enemy1, enemy2, enemy3];
 
 // Place the player object in a variable called player
 var player = new Player;
