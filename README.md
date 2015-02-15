@@ -1,6 +1,13 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Goal: Cross to the river at the top of the screen while avoiding bugs.
 
-for self-checking their submission.
+
+Use arrows to control player movement. 
+
+Bumping into bugs will return the player to the starting tile.
+
+Reach the other side and return to the starting tile.
+
+
